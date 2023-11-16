@@ -1,15 +1,24 @@
-import React from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-
 const App = () => {
-  const navigate = useNavigate();
   const loginWithGoogle = async () => {
-    window.location.href = "http://localhost:3000/auth/google";
-    // const resp = await axios.post("http://localhost:3000/api/auth/register");
-    // console.log(resp);
+    window.location.href = "http://localhost:5000/auth/google";
   };
-  return <button onClick={loginWithGoogle}>Login with Google</button>;
+  const logoutWithGoogle = async () => {
+    window.location.href = "http://localhost:5000/auth/logout";
+  };
+  const getData = async () => {
+    const resp = await axios.get("http://localhost:5000/auth/login/success", {
+      withCredentials: true,
+    });
+    console.log(resp.data);
+  };
+  return (
+    <div>
+      <button onClick={loginWithGoogle}>Login with Google</button>
+      <button onClick={logoutWithGoogle}>Logout with Google</button>
+      <button onClick={getData}>Get Data</button>
+    </div>
+  );
 };
 
 export default App;
